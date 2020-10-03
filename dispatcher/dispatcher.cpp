@@ -20,6 +20,5 @@ void Dispatcher::put_on_CPU(PCB &process) {
 }
 
 bool Dispatcher::isValidJobOnCPU() {
-  std::cout << "valid? -> " << is_valid_job_on_cpu << " current_process status: " << cpu->get_COPY_of_Current_Process().isEmpty() << std::endl;
   return is_valid_job_on_cpu; // getter for is_valid_job_on_cpu dispatcher class variable
 }

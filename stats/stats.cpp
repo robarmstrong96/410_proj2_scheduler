@@ -49,7 +49,6 @@ void Stats::calcStats() {
     }
 
     // calculate average values
-    std::cout << "fortnite: " << vec->size() << std::endl;
     av_response_time = std::accumulate(wait.begin(), wait.end(), 0.0) / response.size();
     av_turnaround_time = std::accumulate(turnaround.begin(), turnaround.end(), 0.0) / turnaround.size();
     av_wait_time = std::accumulate(response.begin(), response.end(), 0.0) / wait.size();
