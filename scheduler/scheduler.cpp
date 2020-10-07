@@ -9,8 +9,8 @@
 #include "../includes/scheduler.h"
 
 void Scheduler::add(PCB p) {
-  ready_q->push(p);  // adds pcb to scheduler queue (memory)
   sort(); // SRTF sort
+  ready_q->push(p);  // adds pcb to scheduler queue (memory)
 }
 
 PCB Scheduler::getNext() {
@@ -27,14 +27,10 @@ bool Scheduler::isEmpty() {
 }
 
 bool Scheduler::time_to_switch_processes(int tick_count, PCB &p) {
-  sort();
-  if (tick_count > 0) {
-      std::cout << (tick_count % time_slice == 0) << ": Time Slice Change?" << std::endl;
-      if (preemptive == true && ( (p.arrival_time - tick_count) % time_slice == 0) ) { // Preemptive algorithm will be used and the current tick count is greater than allowed by time slice
-        return true;
-      }
-    }
-  if (p.remaining_cpu_time <= 0) { // Remainging alloted CPU time left is zero
+  if (preemptive == true && ( (p.required_cpu_time - p.remaining_cpu_time) % time_slice == 0) ) { // Preemptive algorithm will be used and the current tick count is greater than allowed by time slice
+    return true;
+  }
+  if (p.remaining_cpu_time <= 0) { // Remaining alloted CPU time left is zero
     return true;
   }
   return false;
